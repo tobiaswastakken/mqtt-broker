@@ -24,10 +24,10 @@ sub.on('connect', () => {
 
 
 sub.on('message', (topic, message) => {
-    message = message.toString()
-    message = message.split(" ")
-    console.log("test " + message)
-    miConsulta = "INSERT INTO cargar (ubicacion,modelo,valor) VALUES ('" + message[1]+ "','" + message[2] + "','" + message[3] + "');"
+    let now = new Date();
+    message = JSON.parse(message)
+    miConsulta = "INSERT INTO cargar (ubicacion,humedad,temperatura,fecha) VALUES ('" + message.ubicacion+ "','" + message.humedad + "','" + message.temperatura + "', + now());"
+    console.log(message)
     db.query(
         miConsulta,
         {data: message},
